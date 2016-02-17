@@ -85,6 +85,33 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &216468359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 216468360}
+  m_Layer: 0
+  m_Name: TopLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &216468360
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 216468359}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.77, y: -1.78, z: -7.602539}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1390410715}
+  m_RootOrder: 0
 --- !u!1 &239913290
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +122,7 @@ GameObject:
   - 4: {fileID: 239913291}
   - 212: {fileID: 239913292}
   - 61: {fileID: 239913293}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -277,7 +304,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5, y: -1.15, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 216468360}
+  - {fileID: 1863930051}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!114 &1390410716
@@ -292,7 +321,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 20
-  jumpForce: 10
+  jumpForce: 20
+  top_left: {fileID: 216468360}
+  bottom_right: {fileID: 1863930051}
+  ground_layers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1466614855
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +436,7 @@ GameObject:
   - 4: {fileID: 1527754626}
   - 212: {fileID: 1527754627}
   - 61: {fileID: 1527754628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (2)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -475,7 +509,7 @@ GameObject:
   - 4: {fileID: 1726469138}
   - 212: {fileID: 1726469139}
   - 61: {fileID: 1726469140}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (1)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -538,3 +572,30 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2, y: 0.5}
+--- !u!1 &1863930050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1863930051}
+  m_Layer: 0
+  m_Name: BotRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1863930051
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863930050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.49, y: -2.35, z: -7.6015625}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1390410715}
+  m_RootOrder: 1
