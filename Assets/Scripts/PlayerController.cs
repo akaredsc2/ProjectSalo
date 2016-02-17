@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	private SpriteRenderer rend;
 
 
-	public bool isGrounded;
+	private bool isGrounded;
 	private Vector2 playerDirection;
 
 
