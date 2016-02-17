@@ -6,15 +6,15 @@ public class PlayerController : MonoBehaviour {
 	public float playerSpeed;
 	public float jumpForce;
 
-	public Transform top_left;
-	public Transform bottom_right;
-	public LayerMask ground_layers;
+	public Transform topLeft;
+	public Transform bottomRight;
+	public LayerMask groundLayers;
 
 	private Rigidbody2D rb;
 	private SpriteRenderer rend;
 
 
-	private bool isGrounded;
+	public bool isGrounded;
 	private Vector2 playerDirection;
 
 
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 		float horizontal = Input.GetAxisRaw ("Horizontal");
 		float vertical = 0;
 
-		isGrounded = Physics2D.OverlapArea(top_left.position, bottom_right.position, ground_layers);  
+		isGrounded = Physics2D.OverlapArea(topLeft.position, bottomRight.position, groundLayers);  
 
 		if (isGrounded) {
 			vertical = Input.GetAxisRaw ("Jump") * jumpForce;
