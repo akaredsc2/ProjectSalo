@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	private SpriteRenderer rend;
 
 	private bool isGrounded;
-	private float groundCheckRadius = 0.2f;
+	private float groundCheckRadius = 0.35f;
 
 	private Vector2 playerDirection;
 
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update() {
-		if (isGrounded && Input.GetKeyDown (KeyCode.Space)) {
+		if (isGrounded && Input.GetButtonDown ("Jump")) {
 			rb.AddForce (Vector2.up * jumpForce);
 		}
 	}
@@ -33,21 +33,15 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate() {
 		isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, groundLayer);
 
-		float horizontal = Input.GetAxis ("Horizontal");
+		float horizontal = Input.GetAxisRaw ("Horizontal");
 
 		if (horizontal != 0) {
-
 			//Flip player sprite according to movement direction
 			rend.flipX = horizontal < 0;
 
 			//Does not allow player to stack in wall if he holds move button while falling
-			if (isGrounded) {
-				playerDirection.Set (horizontal * playerSpeed, rb.velocity.y);
-				rb.velocity = playerDirection;
-			} else {
-				rb.AddForce (Vector2.down);
-			}
-
+			playerDirection.Set (horizontal * playerSpeed, rb.velocity.y);
+			rb.velocity = playerDirection;
 		}
 	}
 }
