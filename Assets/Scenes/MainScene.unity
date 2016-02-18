@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea41fa2555d8014bab7fb1ec783258b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 7
   jumpForce: 950
   groundCheck: {fileID: 1487132039}
   groundLayer:
