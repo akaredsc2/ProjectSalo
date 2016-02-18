@@ -6,46 +6,48 @@ public class PlayerController : MonoBehaviour {
 	public float playerSpeed;
 	public float jumpForce;
 
-	public Transform topLeft;
-	public Transform bottomRight;
-	public LayerMask groundLayers;
+	//Ground check fields
+	public Transform groundCheck;
+	public LayerMask groundLayer;
 
 	private Rigidbody2D rb;
 	private SpriteRenderer rend;
 
-
 	private bool isGrounded;
+	private float groundCheckRadius = 0.2f;
+
 	private Vector2 playerDirection;
-
-
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		rend = GetComponent<SpriteRenderer> ();
 		playerDirection = new Vector2 ();
 	}
-		
-	void Update () {
-		
+
+	void Update() {
+		if (isGrounded && Input.GetKeyDown (KeyCode.Space)) {
+			rb.AddForce (Vector2.up * jumpForce);
+		}
 	}
 
 	void FixedUpdate() {
-		float horizontal = Input.GetAxisRaw ("Horizontal");
-		float vertical = 0;
+		isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, groundLayer);
 
-		isGrounded = Physics2D.OverlapArea(topLeft.position, bottomRight.position, groundLayers);  
+		float horizontal = Input.GetAxis ("Horizontal");
 
-		if (isGrounded) {
-			vertical = Input.GetAxisRaw ("Jump") * jumpForce;
-		}
+		if (horizontal != 0) {
 
-		if ( horizontal != 0 || vertical != 0) {
-
+			//Flip player sprite according to movement direction
 			rend.flipX = horizontal < 0;
 
-			playerDirection.Set (horizontal, vertical);
-			rb.AddForce (playerDirection * playerSpeed);
-		}
+			//Does not allow player to stack in wall if he holds move button while falling
+			if (isGrounded) {
+				playerDirection.Set (horizontal * playerSpeed, rb.velocity.y);
+				rb.velocity = playerDirection;
+			} else {
+				rb.AddForce (Vector2.down);
+			}
 
+		}
 	}
 }
