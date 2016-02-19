@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour {
 
 			//Does not allow player to stack in wall if he holds move button while falling
 			playerDirection.Set (horizontal * playerSpeed, rb.velocity.y);
+			if (!isGrounded && rb.IsTouchingLayers(groundLayer)) {
+				playerDirection.Set (0, rb.velocity.y);
+			}
 			rb.velocity = playerDirection;
 		}
 	}
