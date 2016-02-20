@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	// Walking and jumping
 	public float playerSpeed;
 	public float jumpForce;
 
@@ -11,18 +10,11 @@ public class PlayerController : MonoBehaviour {
 	public Transform groundCheck;
 	public LayerMask groundLayer;
 
-	//Climbing ladders
-	public bool isOnLadder;
-	public float ladderClimdSpeed;
-
 	private Rigidbody2D rb;
 	private SpriteRenderer rend;
 
 	private bool isGrounded;
-	private float groundCheckRadius;
-
-	//Save gravity scale for ladder climbing
-	private float gravityScale;
+	private float groundCheckRadius = 0.35f;
 
 	[HideInInspector]
 	public Vector2 playerDirection;
@@ -30,11 +22,6 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		rend = GetComponent<SpriteRenderer> ();
-
-		groundCheckRadius = 0.35f;
-
-		gravityScale = rb.gravityScale;
-
 		playerDirection = new Vector2 ();
 	}
 
@@ -49,28 +36,17 @@ public class PlayerController : MonoBehaviour {
 
 		float horizontal = Input.GetAxisRaw ("Horizontal");
 
-		//Flip player sprite according to movement direction
 		if (horizontal != 0) {
+			//Flip player sprite according to movement direction
 			rend.flipX = horizontal < 0;
-		}
 
-		//Does not allow player to stack in wall if he holds move button while falling
-		if (!isGrounded && rb.IsTouchingLayers (groundLayer)) {
-			playerDirection.Set (0, rb.velocity.y);
-		} else {
-			playerDirection.Set (horizontal * playerSpeed, rb.velocity.y);
+			//Does not allow player to stack in wall if he holds move button while falling
+			if (!isGrounded && rb.IsTouchingLayers (groundLayer)) {
+				playerDirection.Set (0, rb.velocity.y);
+			} else {
+				playerDirection.Set (horizontal * playerSpeed, rb.velocity.y);
+			}
+			rb.velocity = playerDirection;
 		}
-
-		if (isOnLadder) {
-			rb.gravityScale = 0f;
-			float vertical = Input.GetAxisRaw ("Vertical");
-			playerDirection.y = vertical * ladderClimdSpeed;
-		}
-		if (!isOnLadder) {
-			rb.gravityScale = this.gravityScale;
-		}
-
-		//rb.gravityScale = isOnLadder ? 0f : this.gravityScale;
-		rb.velocity = playerDirection;
 	}
 }
