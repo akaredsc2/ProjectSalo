@@ -21,7 +21,6 @@ public class CameraController : MonoBehaviour {
 
 	bool lookAheadStopped;
 
-//	public GameObject player;
 	public BoxCollider2D collider;
 
 
