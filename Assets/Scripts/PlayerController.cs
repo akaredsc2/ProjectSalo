@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour {
 	private bool isGrounded;
 	private float groundCheckRadius = 0.35f;
 
-	private Vector2 playerDirection;
+	[HideInInspector]
+	public Vector2 playerDirection;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
