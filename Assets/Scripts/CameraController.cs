@@ -3,7 +3,20 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-//	public Controller2D target;
+	public GameObject player;
+
+	private Vector3 offset;
+
+	void Start () {
+		offset = transform.position - player.transform.position;
+	}
+
+	void LateUpdate () {
+		transform.position = player.transform.position + offset;
+	}
+
+	/*
+	public Controller2D target;
 	public PlayerController controller;
 	public float verticalOffset;
 	public float lookAheadDstX;
@@ -99,5 +112,6 @@ public class CameraController : MonoBehaviour {
 			velocity = new Vector2 (shiftX, shiftY);
 		}
 	}
+	*/
 
 }
